@@ -6,7 +6,13 @@ A colorful, one-button browser runner. Victor E. Bull tries to cross campus by j
 
 The [reusable prompt](prompts/bulls-on-the-loose.txt) is the complete build brief. Copy the whole file into a coding assistant with an empty working folder. It asks the assistant to create `game/index.html`, which opens directly in a browser and works offline once generated.
 
-Only the prompt and plan are saved here. The game hasn't been generated or play-tested yet. Reusing the prompt should recreate the concept and features; artwork, code, and difficulty will vary between runs.
+This repo contains the prompt, demo plan, and a sample screenshot. Reusing the prompt should recreate the concept and features; artwork, code, and difficulty will vary between runs.
+
+### Sample result
+
+One generated version, shown as an example. The screenshot isn't required to use the prompt.
+
+![Bulls on the Loose showing Victor E. Bull, a goose, and a game-over message after stepping in poop.](samples/bulls-on-the-loose.png)
 
 ## First version
 
