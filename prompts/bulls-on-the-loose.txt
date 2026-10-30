@@ -1,0 +1,45 @@
+Build a complete, playable browser game called "Bulls on the Loose" for a live University at Buffalo AI development demo. Implement it now, not just a plan. Follow this brief and make routine implementation choices yourself.
+
+CONCEPT
+
+A colorful side-scrolling endless runner inspired by the simple jump-and-survive gameplay of Chrome's dinosaur game, with original artwork and code. The player is Victor E. Bull, UB's blue bull mascot, trying to cross campus while dodging Canada geese and the poop they've left on the path. Keep the humor friendly and cartoonish.
+
+DELIVERABLE
+
+Create game/index.html with all HTML, CSS, JavaScript, and artwork embedded. It must run by opening the file directly in a modern browser, including offline. Use plain JavaScript and Canvas 2D for the game, with real HTML controls and status text around it. No build step, packages, frameworks, CDN, network requests, remote fonts, backend, or external assets. Don't require image generation or downloaded mascot art. Preserve unrelated files. If you can't write files, return the complete HTML in one code block so I can save it as index.html.
+
+LOOK AND FEEL
+
+- Make the game the main attraction, with a large play area, clear title, a short instruction line, and a compact score display. Avoid a dashboard or marketing-page layout.
+- Draw a recognizable, playful interpretation of Victor E. Bull: an upright blue bull with white horns, a broad muzzle, expressive eyes, a gold nose ring, and athletic clothing. Animate his legs while running and give him a distinct jumping pose. Don't substitute an emoji, generic square, or dinosaur. Treat this as original demo artwork, not an official mascot asset.
+- Draw recognizable Canada geese with long black necks, white cheek patches, gray bodies, and visible feet. Give them a little waddling or head movement. Draw small, clearly visible cartoon poop piles with an outline and a light tip. Neither obstacle should blend into the path.
+- Set the scene on a stylized North Campus path with a lake and a distant colonnade suggesting Lake LaSalle and Baird Point. Keep scenery quieter than the obstacles. Use gentle parallax to add depth.
+- Lead with UB Blue (#005bbb) and white (#ffffff). Use exact accent colors sparingly: Harriman Blue (#002f56), Victor E. Blue (#2f9fd0), Lake LaSalle (#00a69c), Olmsted Green (#6da04b), Solar Strand (#ffc72c), Bronze Buffalo (#ad841f), Townsend Gray (#666666), Baird Point (#e4e4e4), and black (#000000). Use Arial, Helvetica, sans-serif. Keep text high contrast and at least 16px.
+- Use plain text for "University at Buffalo". Don't recreate an official logo or lockup. Add a small footer: "Made with AI for a UB showcase demo."
+
+GAMEPLAY
+
+- Victor runs automatically. The only movement action is jump: Space, Arrow Up, clicking/tapping the play area, or a visible Jump button. Use a fixed jump height. No double jump, ducking, combat, or collectibles in this version.
+- Start on a ready screen with "Jump the geese. Watch your step." and a Start button. Starting gives the player a safe opening before the first obstacle.
+- Ground obstacles are individual geese and poop piles of varied but jumpable widths. A collision with either ends the run. Freeze the action and show "HONK! Goose got the right of way." or "You stepped in it." as appropriate, plus score, best score, and Play Again.
+- Score is whole-number distance traveled, labeled "Distance (m)". Retain the best score on this browser with localStorage. If storage is unavailable, keep an in-memory best score and let play continue.
+- Start gently and increase speed gradually to a reasonable cap. Aim for short, replayable rounds, with a forgiving first 10 seconds. Don't force a time limit.
+- Every obstacle sequence must be beatable with one jump at a time. Derive safe spacing from jump duration, obstacle width, and current speed, leaving time to land and jump again. Preserve adequate advance warning on narrow screens. Avoid overlapping hazards or random combinations that require an impossible jump.
+- Use slightly forgiving hitboxes inside the visible artwork. A successful jump must visibly clear a goose. Poop should be small but easy to see.
+- Provide Pause/Resume and Play Again buttons. P pauses/resumes during play. Automatically pause when the page loses focus or becomes hidden, and require explicit resume. Restart resets the run cleanly while preserving the best score. Require a fresh input after game over so the collision input can't instantly restart the game.
+
+CONTROLS AND ACCESSIBILITY
+
+- Support desktop and phone-sized screens without horizontal page overflow. Keep controls usable in portrait orientation, with touch targets at least 44 by 44 CSS pixels.
+- Use semantic HTML, lang="en", a descriptive page title ending in "- University at Buffalo", header/main/footer landmarks, and a skip link. Use native buttons, visible focus indicators, and readable instructions outside the canvas. Give the canvas an accessible name and description.
+- Make start, jump, pause, resume, and restart work with the keyboard. Scope game shortcuts to the focused game region. Don't intercept typing, Tab navigation, or native button activation; prevent page scrolling only for handled game keys. Ignore key-repeat for jumping. Avoid duplicate actions from touch and synthesized clicks.
+- Show scores and game state in HTML as well as any canvas overlays. Announce start, pause, and game over in a polite live region, but don't announce every score update. Don't claim these features alone make a visual timing game fully screen-reader accessible.
+- Honor prefers-reduced-motion by disabling decorative parallax and nonessential animation while retaining the movement needed to play. No flashing or screen shake. Keep this version silent.
+
+IMPLEMENTATION AND CHECKS
+
+- Use requestAnimationFrame with elapsed-time-based physics. Clamp long frame gaps or use bounded simulation steps so background tabs and slow frames don't cause teleporting or skipped collisions.
+- Keep game coordinates independent of canvas display size, account for devicePixelRatio, and map pointer coordinates correctly. Resizing must not distort artwork, change jump physics, or break collisions.
+- Keep one animation loop and one set of event listeners across restarts. Separate input, update, drawing, and state transitions. Put tunable values such as gravity, jump velocity, speed cap, and obstacle spacing together near the top.
+- Inspect and fix the finished game before handing it over. If browser tools are available, play it and check: start; each jump input; clearing both obstacle types; collisions with each type; pause/resume; focus loss; repeated restarts; best-score persistence; blocked storage; narrow-screen layout; and reduced motion. Also check that late-game spacing remains playable at maximum speed and that the console has no errors.
+- Report only checks actually performed. If browser testing isn't available, say so and provide a short manual check list. Finish with the file location, how to open it, and a brief description of the controls.
