@@ -2,7 +2,7 @@
 
 ## Bulls on the Loose
 
-A colorful, one-button browser runner. Victor E. Bull tries to cross campus by jumping over Canada geese and poop. Short rounds and quick restarts let visitors take turns at the table.
+A colorful browser runner. Victor E. Bull tries to cross campus by jumping over Canada geese and poop, and ducking under flying geese. Short rounds and quick restarts let visitors take turns at the table.
 
 The [reusable prompt](prompts/bulls-on-the-loose.txt) is the complete build brief. Copy the whole file into a coding assistant with an empty working folder. It asks the assistant to create `game/index.html`, which opens directly in a browser and works offline once generated.
 
@@ -16,13 +16,13 @@ One generated version, shown as an example. The screenshot isn't required to use
 
 ## First version
 
-- One action: jump. Ground geese and poop are the hazards.
+- Tap for a low hop, hold for a higher jump, and hold Down Arrow to duck. Ground geese, poop, and low-flying geese are the hazards.
 - Original drawn mascot and scenery, with UB blue and white leading the design.
 - Gradually increasing speed, distance score, and a best score saved in the visitor's browser.
 - Keyboard and touch controls, pause, and a fast restart.
 - One HTML file with no installs or runtime network access.
 
-Keep ducking, flying geese, sound, and power-ups out of the first build. They're useful changes to demonstrate once the basic game works.
+Keep sound and power-ups out of the first build. They're useful changes to demonstrate once the basic game works.
 
 ## Table demo plan
 
