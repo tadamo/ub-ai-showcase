@@ -1,5 +1,7 @@
 Build a complete, playable browser game called "Bulls on the Loose" for a live University at Buffalo AI development demo. Implement it now, not just a plan. Follow this brief and make routine implementation choices yourself.
 
+This is a quick live demo. Prioritize getting a playable game on screen promptly. Skip unit tests, test frameworks, and comprehensive browser testing. Use only the lightweight check described below.
+
 CONCEPT
 
 A colorful side-scrolling endless runner inspired by the simple jump-and-survive gameplay of Chrome's dinosaur game, with original artwork and code. The player is Victor E. Bull, UB's blue bull mascot, trying to cross campus while dodging Canada geese and the poop they've left on the path. Keep the humor friendly and cartoonish.
@@ -41,5 +43,5 @@ IMPLEMENTATION AND CHECKS
 - Use requestAnimationFrame with elapsed-time-based physics. Clamp long frame gaps or use bounded simulation steps so background tabs and slow frames don't cause teleporting or skipped collisions.
 - Keep game coordinates independent of canvas display size, account for devicePixelRatio, and map pointer coordinates correctly. Resizing must not distort artwork, change jump physics, or break collisions.
 - Keep one animation loop and one set of event listeners across restarts. Separate input, update, drawing, and state transitions. Put tunable values such as gravity, jump velocity, speed cap, and obstacle spacing together near the top.
-- Inspect and fix the finished game before handing it over. If browser tools are available, play it and check: start; each jump input; clearing both obstacle types; collisions with each type; pause/resume; focus loss; repeated restarts; best-score persistence; blocked storage; narrow-screen layout; and reduced motion. Also check that late-game spacing remains playable at maximum speed and that the console has no errors.
-- Report only checks actually performed. If browser testing isn't available, say so and provide a short manual check list. Finish with the file location, how to open it, and a brief description of the controls.
+- Do one brief smoke check if browser tools are already available: open the game, start, jump, collide, and restart. Fix obvious blockers found in that check. Skip exhaustive input, device, accessibility, storage, and long-run difficulty testing. Don't install browser tooling or write automated tests for this demo.
+- If browser tools aren't readily available, briefly inspect the code for obvious errors and hand it over for manual play. Report only checks actually performed and note skipped testing in one sentence. Finish with the file location, how to open it, and a brief description of the controls.
