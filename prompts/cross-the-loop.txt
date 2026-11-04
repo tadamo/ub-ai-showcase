@@ -1,0 +1,99 @@
+Build a complete, playable browser game called "Cross the Loop" for a live University at Buffalo AI development demo. Implement it now, not just a plan. Follow this brief and make routine implementation choices yourself.
+
+This is a quick live demo. Prioritize getting a playable game on screen promptly. Skip unit tests, test frameworks, and comprehensive browser testing. Use only the lightweight check described below.
+
+CONCEPT
+
+A colorful top-down lane-crossing arcade game, with original artwork and code. The player is a UB student late for class who has to get from the Flint Loop bus stop on North Campus to the lecture hall door, dodging Stampede buses, cars circling for parking, bikes, other students on e-scooters, Canada geese that refuse to yield, geese that swoop in low and bomb the path, and the goose poop that covers every patch of grass. Each board cleared makes the commute a little faster and meaner. The campus goose population is a running student joke; lean into it. The tone is dry, friendly campus humor: the kind of jokes students would tell about their own commute. Keep it good-natured. No jokes at the expense of real people, departments, or groups.
+
+DELIVERABLE
+
+Create game/index.html with all HTML, CSS, JavaScript, and artwork embedded. It must run by opening the file directly in a modern browser, including offline. Use plain JavaScript and Canvas 2D for the game, with real HTML controls and status text around it. No build step, packages, frameworks, CDN, network requests, remote fonts, backend, or external assets. Don't require image generation or downloaded art. Preserve unrelated files. If you can't write files, return the complete HTML in one code block so I can save it as index.html.
+
+LOOK AND FEEL
+
+- Make the game the main attraction, with a large play area, clear title, a short instruction line, and a compact status bar (score, level, lives, time left). Avoid a dashboard or marketing-page layout.
+- Use a vertical layout seen from above, roughly 9 columns by 13 rows. Bottom row: the Flint Loop bus shelter sidewalk (start). Top row: a lecture hall entrance with a door (goal). In between, mix road lanes, a grassy median, and a goose lawn. Label the start "Flint Loop" and the goal "Class" in plain text on the canvas.
+- Draw the student as a readable top-down cartoon: a person with a UB Blue hoodie, a big backpack, and a coffee cup. Give them a short hop animation between squares and a facing direction. Don't substitute an emoji or a plain square.
+- Draw distinct hazards so players can tell them apart at a glance:
+  - Stampede buses: long blue buses with "STAMPEDE" in plain white text on the roof. Treat this as demo artwork, not official branding.
+  - Cars: short, varied colors, and some with a tiny "P?" thought bubble because they've been circling for parking.
+  - Bikes: small and fast.
+  - Students on e-scooters: other top-down students standing on scooters, with backpacks, one hand on the handlebar and the other holding a phone. Short, fast, and clearly people, not vehicles. Vary hoodie colors.
+  - Canada geese: long black necks, white cheek patches, gray bodies. They waddle slowly on the lawn rows and occasionally stop and turn to stare at the player.
+  - Flying geese: the same goose seen from above with wings spread and flapping, plus a dark shadow on the ground beneath it. Clearly different from a waddling goose.
+  - Falling poop: a small dropping with a shrinking target ring on the square where it will land.
+  - Goose poop: small, clearly visible cartoon piles with an outline and a light tip, sitting on lawn and sidewalk squares. They must not blend into the grass.
+- Keep scenery (lane markings, grass, a few trees, a lamp post) quieter than the hazards.
+- Lead with UB Blue (#005bbb) and white (#ffffff). Use exact accent colors sparingly: Harriman Blue (#002f56), Victor E. Blue (#2f9fd0), Lake LaSalle (#00a69c), Olmsted Green (#6da04b), Solar Strand (#ffc72c), Bronze Buffalo (#ad841f), Townsend Gray (#666666), Baird Point (#e4e4e4), and black (#000000). Use Arial, Helvetica, sans-serif. Keep text high contrast and at least 16px.
+- Use plain text for "University at Buffalo". Don't recreate an official logo or lockup. Add a small footer: "Made with AI for a UB showcase demo."
+
+GAMEPLAY
+
+- The player moves one square per press: Arrow keys or WASD, a swipe on the play area, or a visible on-screen D-pad. One move per press; ignore key-repeat. Moves are quick (around 120 milliseconds) and can't be queued more than one move ahead.
+- Hazards move in lanes at fixed speeds and directions, wrapping off-screen. Each lane has its own speed and spacing. Buses are slow and long, cars are medium, bikes and students on e-scooters are fast and short. Mix e-scooter riders into road lanes from level 1, and add more of them at higher levels. Geese wander slowly along lawn rows and pause at random.
+- Goose poop sits still on lawn and sidewalk squares. Place a few piles at the start of each crossing, more at higher levels. Geese occasionally leave a fresh pile behind as they waddle, up to a per-level cap. Stepping in poop costs a life, like any other hazard. Poop clears at the start of each new crossing.
+- Flying geese start at level 2. A goose swoops in low from one side and flies straight across a single row (any row except start and goal), over roads and lawns alike. Warn first: show a flashing arrow and the goose's shadow at the screen edge on that row about 1 second before it enters. Touching a flying goose costs a life.
+- Flying geese drop poop. While crossing, a goose can drop one or two droppings onto squares below its path or the rows next to it. Show a target ring on the landing square about 0.8 seconds before impact, shrinking as the dropping falls. If the player is on that square at impact, they lose a life. A dropping that lands on a lawn or sidewalk square stays there as regular ground poop. One that lands on a road splats and fades within a second.
+- Touching any hazard costs a life. Start with 3 lives, shown as coffee cups. After a hit, freeze briefly, show a message for that hazard, and return the player to the start of the current crossing. Keep the level and timer running.
+- Each crossing has a countdown labeled "Class starts in". Start at 30 seconds. If it hits zero, lose a life and restart the crossing with a fresh timer.
+- Reaching the goal row completes the crossing. Show a short success line, then start the next level.
+- Difficulty ramps gradually with each board cleared, never in big jumps. Each new level raises every lane's speed by a small step (about 8 percent), up to a playable cap. Traffic gets a little denser, more e-scooter riders appear, flying geese come more often, drop more poop, and fly a bit faster, and there's more starting ground poop. Each of these has its own cap. Within a level, speeds stay constant so players can read the lanes. Restarting returns to level 1 speeds.
+- Give each level a name shown at its start:
+  1. "Syllabus Week"
+  2. "First Quiz"
+  3. "Midterms"
+  4. "Lake Effect Advisory" (light snowfall overlay, visuals only)
+  5. "Finals Week"
+  After level 5, keep cycling with "Finals Week (again)" and increasing difficulty to the cap.
+- Score: +10 for each new row reached in a crossing (no points for revisiting rows), +100 for reaching class, and +5 for each second left on the timer. Retain the best score on this browser with localStorage. If storage is unavailable, keep an in-memory best score and let play continue.
+- Game over when lives reach zero. Show score, best score, levels cleared, a closing line, and Play Again.
+
+WIT
+
+Pick hit and success lines at random from these lists so repeat plays stay fresh. Show them on the canvas overlay and in the HTML status text. Feel free to add a few more in the same voice.
+
+- Stampede bus: "Flattened by the Stampede. At least it was on time." / "You missed the bus. The bus did not miss you."
+- Car: "Hit by someone circling for parking since 7 a.m." / "That driver has been looking for a spot since orientation."
+- Bike: "Bike lane? This whole campus is a bike lane." / "Cyclist yelled 'on your left.' You were on their left."
+- Student on e-scooter: "Scooter got you. No bell, naturally." / "Taken out by a classmate on a scooter. They were also late." / "They were reading a text. So were you."
+- Goose: "HONK! The goose has tenure." / "The goose was here first. The goose will be here last." / "You looked a goose in the eye. Bold."
+- Flying goose: "Low-flying goose. No flight plan filed." / "Air superiority: geese."
+- Poop from above: "Direct hit from above. Some say it's good luck. It isn't." / "Bombed by a goose. Your hoodie will never be the same."
+- Goose poop: "You stepped in it. Those shoes are done." / "Goose poop: UB's most abundant natural resource." / "Watch your step. This is goose territory."
+- Timer: "Late again. Your professor has stopped taking it personally." / "You'll get the slides from someone. Probably."
+- Success: "Made it. Back row seat secured." / "On time. Your TA looks genuinely surprised." / "Class reached. Coffee mostly intact."
+- Flying goose warning (small text near the arrow): "INCOMING"
+- Ready screen: "Class starts in 30 seconds. The Stampede waits for no one." with a Start button.
+- Game over closing lines, chosen by levels cleared: 0 = "Maybe take the online section.", 1 to 2 = "Solid C-plus commute.", 3 to 4 = "Dean's List of crossing the street.", 5 or more = "Legend. The geese respect you now."
+
+CONTROLS AND ACCESSIBILITY
+
+- Support desktop and phone-sized screens without horizontal page overflow. Keep the D-pad usable in portrait orientation, with touch targets at least 44 by 44 CSS pixels.
+- Use semantic HTML, lang="en", a descriptive page title ending in "- University at Buffalo", header/main/footer landmarks, and a skip link. Use native buttons, visible focus indicators, and readable instructions outside the canvas. Give the canvas an accessible name and description.
+- Make start, move, pause, resume, and restart work with the keyboard. Scope game shortcuts to the focused game region. Don't intercept typing, Tab navigation, or activation of other buttons; prevent page scrolling only for handled game keys. Avoid duplicate moves from pointer events and synthesized clicks.
+- Show score, level, lives, and time in HTML as well as on the canvas. Announce start, level changes, hits, incoming flying geese, pause, and game over in a polite live region, but don't announce every move or timer tick. Don't claim these features alone make a visual timing game fully screen-reader accessible.
+- Honor prefers-reduced-motion by disabling snowfall, goose head turns, and other decorative animation while keeping the movement needed to play. No flashing or screen shake.
+- Play a short, quiet click for each accepted directional move, including Arrow keys and the on-screen D-pad. Synthesize it with the Web Audio API so no audio file is needed. Start audio only after a user gesture, add a Sound on/off button, and keep the game playable if audio is unavailable. Don't click for ignored inputs or key-repeat.
+
+FAIRNESS
+
+- Every lane must always have gaps the player can step into. Derive minimum gap size from lane speed and move duration so a player who waits for an opening can always cross.
+- Geese and poop together must never fully block a lawn row; leave at least two open squares at all times. Never drop poop on the start row, the goal row, the player's current square, or the square they're moving into. Keep a clear path from start to goal at all times.
+- Use slightly forgiving hitboxes inside the visible artwork. A near miss should look like a near miss.
+- Flying geese and falling poop must always be dodgeable: the warning and target ring must give enough time to step one square away, never target more than one square in the player's 3-by-3 neighborhood at once, and never land on the start or goal row. Only one flying goose on screen at a time, and no flyovers during the first 3 seconds of a crossing or a respawn grace period.
+- Give a 1-second grace period after each respawn where the player blinks and can't be hit, and keep the start row hazard-free.
+- Keep level 1 easy enough that a first-time visitor usually reaches class on the first or second try.
+
+STATE AND CONTROLS
+
+- Provide Pause/Resume and Play Again buttons. P pauses and resumes during play. Automatically pause when the page loses focus or becomes hidden, and require explicit resume. Paused time must not count down the class timer.
+- Restart resets lives, score, level, and timer cleanly while preserving the best score. Require a fresh input after game over so a held key can't instantly restart.
+
+IMPLEMENTATION AND CHECKS
+
+- Use requestAnimationFrame with elapsed-time-based movement. Clamp long frame gaps so background tabs and slow frames don't cause teleporting or skipped collisions.
+- Keep game coordinates independent of canvas display size, account for devicePixelRatio, and map pointer and swipe coordinates correctly. Resizing must not distort artwork or break collisions.
+- Keep one animation loop and one set of event listeners across restarts. Separate input, update, drawing, and state transitions. Put tunable values (grid size, move duration, lane speeds, gap sizes, timer length, per-level speed increase, speed cap, scooter share, flyover start level and frequency, drops per flyover, warning times, poop caps, lives) and the message lists together near the top so they're easy to change live.
+- Do one brief smoke check if browser tools are already available: open the game, start, cross a few lanes, get hit by a hazard, step in poop, dodge a flying goose and its poop at level 2, reach class once, let the timer run out, and restart. Fix obvious blockers found in that check. Skip exhaustive input, device, accessibility, storage, and long-run difficulty testing. Don't install browser tooling or write automated tests for this demo.
+- If browser tools aren't readily available, briefly inspect the code for obvious errors and hand it over for manual play. Report only checks actually performed and note skipped testing in one sentence. Finish with the file location, how to open it, and a brief description of the controls.
