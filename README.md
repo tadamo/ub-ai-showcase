@@ -75,6 +75,22 @@ Works the same for either game.
 
 Use a separate folder per game. Both prompts write to `game/index.html`.
 
+## Agentic PR demo
+
+A pull request (PR) proposes a change for review before it is merged. For this demo, give the agent one small task and let visitors follow it from the request to a reviewable PR. The agent does the work; a person decides whether to merge it.
+
+Example request:
+
+> Add a short "Agentic PR demo" walkthrough to the README. Explain the request, agent checks, and human review. Keep the change documentation-only. Use a separate branch, check your work, and open a PR without merging it. Before pushing, check whether a push or PR would start a build and ask for approval if it would.
+
+1. **Request:** Agree on one bounded change and what counts as done. For this example, only the README should change; game prompts and samples should stay untouched.
+2. **Inspect:** Have the agent read the relevant files, check for existing local changes, and inspect build triggers before publishing anything.
+3. **Edit and check:** Have it make the change on a separate branch, review the diff, and check local Markdown links and whitespace. For a game change, also play the affected behavior in the browser. Ask it to report what it actually checked and what it skipped.
+4. **Open the PR:** Have it commit only the intended files and open a PR with a summary, checks performed, and any limitations. Show visitors the changed lines and the commit on GitHub.
+5. **Human review:** Read the diff and check that it meets the request. Leave a review comment for a follow-up change, or approve it when satisfied. Leave merging to the human reviewer; creating a PR does not mean the change is approved.
+
+Keep the demo PR open while explaining it. A useful discussion prompt is: "What would you need to verify before accepting this change?" A successful check is evidence for review, not a guarantee that the agent is right.
+
 ## Reference notes
 
 - The [UB AI Showcase announcement](https://www.buffalo.edu/ubit/news/article.host.html/content/shared/www/ubit/news/2026/ubit-new-AI-Showcase.detail.html) lists November 4, 2026, 10 a.m. to 3 p.m., in the Student Union, with drop-in demonstrations including AI for Developers.
